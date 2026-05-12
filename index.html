@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Truth or Dare Couple 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffb6d9, #ffd6ec, #ffe9f5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 700px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 30px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(255, 105, 180, 0.25);
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ff4f95;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .name-box {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    input {
+      flex: 1;
+      padding: 14px;
+      border-radius: 15px;
+      border: 2px solid #ffc0db;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .dice {
+      width: 120px;
+      height: 120px;
+      margin: 20px auto;
+      background: linear-gradient(145deg, #ff6fa9, #ff9ec5);
+      border-radius: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 10px 20px rgba(255,105,180,0.4);
+      transition: 0.4s;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .shake {
+      animation: shake 0.6s;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(10deg); }
+      50% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 15px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      font-weight: bold;
+    }
+
+    .truth {
+      background: #ff69b4;
+      color: white;
+    }
+
+    .dare {
+      background: #ff8fab;
+      color: white;
+    }
+
+    .roll {
+      background: #ff4f95;
+      color: white;
+    }
+
+    .kiss-btn {
+      background: linear-gradient(135deg,#ff5fa2,#ff85c0);
+      color: white;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+    }
+
+    .card {
+      margin-top: 25px;
+      background: #fff0f7;
+      padding: 25px;
+      border-radius: 25px;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: #444;
+      line-height: 1.7;
+      box-shadow: inset 0 0 15px rgba(255,182,193,0.4);
+    }
+
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      padding: 20px;
+    }
+
+    .popup-content {
+      background: white;
+      width: 100%;
+      max-width: 500px;
+      padding: 30px;
+      border-radius: 30px;
+      text-align: center;
+      animation: popupShow 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+    }
+
+    @keyframes popupShow {
+      from {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #ff4f95;
+    }
+
+    .popup-title {
+      font-size: 1.5rem;
+      color: #ff4f95;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    .popup-text {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .type {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #ff4f95;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 6s linear infinite;
+      opacity: 0.4;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+      }
+    }
+
+    @media(max-width: 600px){
+      h1 {
+        font-size: 2rem;
+      }
+
+      .card {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>💖 Truth or Dare 💖</h1>
+    <p class="subtitle">Main bareng pasangan biar makin seru dan romantis ✨</p>
+
+    <div class="name-box">
+      <input type="text" id="name1" placeholder="Masukkan nama kamu">
+      <input type="text" id="name2" placeholder="Masukkan nama pasangan">
+    </div>
+
+    <div class="dice" id="dice">🎲</div>
+
+    <button class="roll" onclick="rollDice()">🎲 Putar Dadu</button>
+
+    <div class="type" id="playerTurn">Giliran akan muncul di sini</div>
+
+    <div class="btn-group">
+      <button class="truth" onclick="getTruth()">💌 Truth</button>
+      <button class="dare" onclick="getDare()">🔥 Dare</button>
+      <button class="roll" onclick="getRandomTD()">🎲 Acak</button>
+    </div>
+
+    <div class="card" id="questionBox">
+      Tekan tombol Truth atau Dare untuk memulai permainan 💕
+    </div>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="closePopup()">✖</span>
+      <div class="popup-title" id="popupTitle"></div>
+      <div class="popup-text" id="popupText"></div>
+    </div>
+  </div>
+
+  </div>
+
+  <script>
+const truths = [];
+const dares = [];
+const kisses = [];
+
+function generateTruth(i) {
+  const list = [
+    'Apa hal pertama yang bikin kamu suka sama aku?',
+    'Bagian tubuh aku yang paling kamu suka?',
+    'Kapan kamu mulai nyaman sama aku?',
+    'Apa momen paling romantis menurutmu?',
+    'Apa yang paling kamu rindukan saat jauh dari aku?',
+    'Hal kecil apa yang bikin kamu jatuh cinta lagi?',
+    'Pernah cemburu sama siapa?',
+    'Apa yang paling bikin kamu takut kehilangan aku?',
+    'Kalau aku sedih, apa yang pengen kamu lakukan?',
+    'Apa arti pelukan dariku buat kamu?',
+    'Ciuman pertama ideal menurutmu gimana?',
+    'Apa bagian dari hubungan kita yang paling kamu suka?',
+    'Kapan kamu merasa paling dicintai?',
+    'Apa hal paling manis yang pernah aku lakukan?',
+    'Apa love language terbesarmu?',
+    'Apa yang bikin kamu nyaman disentuh?',
+    'Pernah malu-malu pas dekat aku?',
+    'Kalau bisa peluk aku sekarang, berapa lama?',
+    'Apa tempat date favoritmu sama aku?',
+    'Apa hal yang bikin kamu deg-degan saat dekat aku?',
+    'Apa sentuhan favoritmu dariku?',
+    'Pernah kepikiran masa depan sama aku?',
+    'Apa hal yang pengen kamu coba bareng aku?',
+    'Apa momen paling bikin kamu senyum karena aku?',
+    'Hal apa yang pengen lebih sering kita lakukan?',
+    'Apa yang bikin kamu merasa aman sama aku?',
+    'Kapan terakhir kali kamu kangen banget sama aku?',
+    'Apa panggilan sayang favoritmu?',
+    'Apa yang paling bikin kamu nyaman saat dipeluk?',
+    'Pernah takut aku pergi?',
+    'Apa yang bikin hubungan kita spesial?',
+    'Hal romantis apa yang belum pernah kamu coba?',
+    'Apa yang kamu rasakan saat kita pegangan tangan?',
+    'Apa yang paling bikin kamu melt dari aku?',
+    'Apa kebiasaan kecilku yang kamu suka?',
+    'Kapan kamu merasa paling dekat denganku?',
+    'Apa hal paling lucu saat kita bersama?',
+    'Apa yang bikin kamu paling bahagia dalam hubungan ini?',
+    'Apa yang pengen kamu bilang tapi belum pernah?',
+    'Apa momen favoritmu waktu kita berdua?',
+    'Apa jenis pelukan favoritmu?',
+    'Apa yang bikin kamu nyaman dicium?',
+    'Kalau bisa tidur sambil pelukan sekarang, mau?',
+    'Apa hal paling manis yang pernah kamu bayangin tentang kita?',
+    'Apa yang paling kamu suka saat aku manja?',
+    'Apa sisi diriku yang bikin kamu jatuh cinta?',
+    'Apa sentuhan kecil yang paling kamu suka?',
+    'Apa yang kamu pikirin saat lihat aku senyum?',
+    'Apa bagian wajah aku favoritmu?',
+    'Apa momen paling bikin jantung deg-degan?'
+  ];
+
+  return list[i % list.length];
+}
+
+function generateDare(i) {
+  const list = [
+    'Pegangan tangan 5 detik ❤️',
+    'Tatap mata pasangan 10 detik 👀',
+    'Cium kening 3 detik 💋',
+    'Bisik aku sayang kamu 🥺',
+    'Peluk dari belakang 10 detik 🤍',
+    'Elus rambut pasangan 5 detik ✨',
+    'Sandarkan kepala di bahu 10 detik 🫶',
+    'Cium pipi kanan 😘',
+    'Genggam tangan erat 7 detik 🤝',
+    'Tempel jidat 10 detik 😳',
+    'Bisikkan hal manis 💕',
+    'Elus pipi pasangan 5 detik 🌸',
+    'Rangkul pasangan 15 detik ❤️',
+    'Tatap bibir pasangan 7 detik 👀',
+    'Mainkan jari tangan pasangan 🥰',
+    'Cium tangan pasangan ✨',
+    'Usap kepala pasangan pelan 🤍',
+    'Peluk sambil senyum 10 detik 😆',
+    'Bisik aku nyaman sama kamu 💖',
+    'Tempel pipi 5 detik 🥺',
+    'Pegang wajah pasangan 7 detik 😳',
+    'Tatapan romantis 15 detik ❤️',
+    'Elus tangan pasangan ✨',
+    'Cium hidung pasangan 😘',
+    'Rangkul dari samping 10 detik 🤍',
+    'Bisik kamu lucu 🥰',
+    'Peluk singkat 5 detik 💕',
+    'Tatap mata tanpa ketawa 10 detik 👀',
+    'Cium pipi kiri 😚',
+    'Pegangan tangan sambil tatapan ❤️'
+  ];
+
+  return list[i % list.length];
+}
+
+function generateKiss(i) {
+  const list = [
+    'Cium pipi pasangan 💖',
+    'Cium kening pasangan 🥺',
+    'Flying kiss paling gemas 😘',
+    'Kecup tangan pasangan ✨',
+    'Peluk dan cium pasangan ❤️'
+  ];
+
+  return list[i % list.length];
+}
+
+for(let i = 1; i <= 600; i++) {
+  truths.push('Truth #' + i + ': ' + generateTruth(i));
+}
+
+for(let i = 1; i <= 400; i++) {
+  dares.push('Dare #' + i + ': ' + generateDare(i));
+}
+
+for(let i = 1; i <= 100; i++) {
+  kisses.push('Cium #' + i + ': ' + generateKiss(i));
+}
+
+let currentPlayer = '';
+
+function rollDice() {
+  const name1 = document.getElementById('name1').value || 'Kamu';
+  const name2 = document.getElementById('name2').value || 'Dia';
+
+  const players = [name1, name2];
+  currentPlayer = players[Math.floor(Math.random() * players.length)];
+
+  const dice = document.getElementById('dice');
+  dice.classList.add('shake');
+
+  setTimeout(() => {
+    dice.innerHTML = currentPlayer;
+    dice.classList.remove('shake');
+  }, 600);
+
+  document.getElementById('playerTurn').innerHTML = '💘 Giliran: ' + currentPlayer;
+}
+
+function showPopup(title, text) {
+  document.getElementById('popupTitle').innerHTML = title;
+  document.getElementById('popupText').innerHTML = text;
+  document.getElementById('popup').style.display = 'flex';
+}
+
+function closePopup() {
+  document.getElementById('popup').style.display = 'none';
+}
+
+function getTruth() {
+  const randomTruth = truths[Math.floor(Math.random() * truths.length)];
+  showPopup('💌 Truth', '<b>' + (currentPlayer || 'Pemain') + '</b><br><br>' + randomTruth);
+}
+
+function getDare() {
+  const randomDare = dares[Math.floor(Math.random() * dares.length)];
+  showPopup('🔥 Dare', '<b>' + (currentPlayer || 'Pemain') + '</b><br><br>' + randomDare);
+}
+
+function getRandomTD() {
+  if(Math.random() < 0.5) {
+    getTruth();
+  } else {
+    getDare();
+  }
+}
+
+function getKiss() {
+  const randomKiss = kisses[Math.floor(Math.random() * kisses.length)];
+  showPopup('💋 Cium', '<b>' + (currentPlayer || 'Pemain') + '</b><br><br>' + randomKiss);
+}
+
+for(let i = 0; i < 20; i++) {
+  const heart = document.createElement('div');
+  heart.classList.add('heart');
+  heart.innerHTML = '💖';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+  heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+  document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>
